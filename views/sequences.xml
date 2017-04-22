@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>  
+<openerp>
+  <data>
+  	<!--Member Application Numbers-->
+    <record model = 'ir.sequence.type' id = 'seq_type_member_app_id'>    
+  		<field name = "name">Member Application Number</field>
+  		<field name = "code">sacco.member.application</field>
+  	</record>
+  	<record model = "ir.sequence" id = "seq_member_app_id">
+  		<field name = "name">Member Application Number</field>
+  		<field name = "code">sacco.member.application</field>
+  		<field name = "prefix">MEMBER_APP</field>
+  		<field name = "padding">4</field>
+  	</record>
+    <!--Member Numbers-->
+    <record model = 'ir.sequence.type' id = 'seq_type_member_id'>    
+      <field name = "name">Member Number</field>
+      <field name = "code">sacco.member</field>
+    </record>
+    <record model = "ir.sequence" id = "seq_member_id">
+      <field name = "name">Member Numbers</field>
+      <field name = "code">sacco.member</field>
+      <field name = "prefix">MEMBER</field>
+      <field name = "padding">4</field>
+    </record>
+    <!--Member Closure Numbers-->
+    <record model = 'ir.sequence.type' id = 'seq_type_member_closure_id'>    
+      <field name = "name">Member Closure Number</field>
+      <field name = "code">sacco.member.closure</field>
+    </record>
+    <record model = "ir.sequence" id = "seq_member_closure_id">
+      <field name = "name">Member Closure Numbers</field>
+      <field name = "code">sacco.member.closure</field>
+      <field name = "prefix">CLOSURE</field>
+      <field name = "padding">4</field>
+    </record>
+    <!--Member Activation Numbers-->
+    <record model = 'ir.sequence.type' id = 'seq_type_member_activation_id'>    
+      <field name = "name">Member Activation Number</field>
+      <field name = "code">sacco.member.activation</field>
+    </record>
+    <record model = "ir.sequence" id = "seq_member_activation_id">
+      <field name = "name">Member Activation Numbers</field>
+      <field name = "code">sacco.member.activation</field>
+      <field name = "prefix">ACTIVE</field>
+      <field name = "padding">4</field>
+    </record>
+
+    <!--Share Transfer Numbers-->
+    <record model = 'ir.sequence.type' id = 'seq_type_share_transfer_id'>    
+      <field name = "name">Share Transfer Number</field>
+      <field name = "code">sacco.share.transfer</field>
+    </record>
+    <record model = "ir.sequence" id = "seq_share_transfer_id">
+      <field name = "name">Share Transfer Numbers</field>
+      <field name = "code">sacco.share.transfer</field>
+      <field name = "prefix">TRANS_</field>
+      <field name = "padding">4</field>
+    </record>
+
+  </data>
+</openerp>

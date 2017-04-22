@@ -1,0 +1,33 @@
+<openerp>
+    <data>
+        <record model = 'ir.ui.view' id = 'sacco_settings'>
+            <field name = 'name'>Sacco Settings</field>
+            <field name = 'model'>sacco.settings</field>
+            <field name = 'arch' type = 'xml'>
+                <form string = 'Sacco Settings' class = 'oe_form_configuration'>
+                    <header>
+                        <button string = 'Apply' type = 'object' name = 'execute' class = 'oe_highlight'/>
+                            or
+                        <button string = 'Cancel' type = 'object' name = 'cancel' class='oe_link'/>
+                    </header>
+                    <group string = 'Approvals'>
+                        <div>
+                            <field name = 'module_sacco_approvals'/>
+                            <label for = 'module_sacco_approvals'/>
+                        </div>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model = 'ir.actions.act_window' id = 'sacco_settings_action'>
+            <field name = 'name'>Sacco Settings</field>
+            <field name = 'res_model'>sacco.settings</field>
+            <field name = 'view_id' ref = 'sacco_settings'/>
+            <field name = 'view_mode'>form</field>
+            <field name = 'target'>inline</field>
+        </record>
+
+        <menuitem name = 'Sacco' id = 'sacco_settings_menu' parent = 'base.menu_config' action = 'sacco_settings_action'/>
+    </data>
+</openerp>

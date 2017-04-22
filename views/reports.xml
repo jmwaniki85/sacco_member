@@ -1,0 +1,542 @@
+
+
+<openerp>
+	<data>
+		<!--Member Certificate-->
+		<report
+			id = "signhigh_cert"
+			model = "sacco.member"
+			string = "Singhigh Certificate"
+			report_type = "qweb-pdf"
+			name = "sacco_member.sing_cert"
+			file = "sacco.report_sing_high"
+			attachment_use = "True"
+		 />
+
+
+		<template id = "sing_cert">
+			<t t-call = "report.html_container">
+				<t t-foreach = "docs" t-as="doc">
+					<!--<t t-call = "report.external_layout">-->
+						<div class = "page">
+							<div style="width:800px; height:900px; padding:20px; text-align:center; border: 15px solid #787878">
+								<div style="width:750px; height:850px; padding:20px; text-align:center; border: 5px solid #787878">
+								       <span style="font-size:30px; font-weight:bold; color:ff0000;">Singhigh Membership Certificate </span>
+								       <br/><br/>
+								       <span><center><img t-att-src="'/sacco_member/static/src/img/SINGHIGH.png'" style="width:150px;"/></center></span>
+								       <span style="font-size:25px"><i>This is to certify that</i></span>
+								       <br/><br/>
+								       <span style="font-size:30px"><b><span t-field='docs.name'/></b></span><br/><br/>
+								       <span style="font-size:25px"><i>is a Member of</i></span> <br/><br/>
+								       <span style="font-size:30px"><i>Singhigh</i></span> <br/><br/>
+								       <span style="font-size:20px">in good standing since</span> <br/><br/>
+								       <span style="font-size:20px"><i><span t-field='docs.registration_date'/></i></span><br/>								 
+								      <span style="font-size:20px">With all rights and privileges pertaining thereof.</span>
+								      <br/><br/><br/>
+								      <span style="padding-right:30px;">____________________ </span><span>_____________________</span>
+								      <br/><br/><br/>
+								      <span style="padding-right:30px;">Director	 </span><span>Director</span>
+								</div>
+							</div>
+
+
+
+						</div>
+
+					</t>
+				<!--</t> -->
+			</t>
+		</template>
+
+				<!--Signhigh Card-->
+		<report
+			id = "signhigh_card"
+			model = "sacco.member.application"
+			string = "Singhigh Card"
+			report_type = "qweb-pdf"
+			name = "sacco_member.sing_card"
+			file = "sacco.report_sing_high_card"
+			attachment_use = "True"
+		 />
+		<template id = "sing_card">
+					<t t-call = "report.html_container">
+						<t t-foreach = "docs" t-as="doc">
+							<!--<t t-call = "report.external_layout">-->
+								<div class = "page">
+									<div style="width:800px; height:900px; padding:20px; text-align:center; border: 15px solid #787878">
+										<div style="width:750px; height:850px; padding:20px; text-align:center; border: 5px solid #787878">
+										       
+										      <span style="padding-right:30px;">Name: </span><span>_____________________</span>
+										      <br/><br/><br/>
+										      <span style="padding-right:30px;">National ID Number: </span><span>_____________________</span>
+										      <br/><br/><br/>
+										      <span style="padding-right:30px;">Member Number: </span><span>_____________________</span>
+										      <br/><br/><br/>
+										      <span style="padding-right:30px;">Date: </span><span>_____________________</span>
+										      <br/><br/><br/>
+										</div>
+									</div>
+
+
+
+								</div>
+
+							</t>
+						<!--</t> -->
+					</t>
+				</template>
+		<!--Signhigh Certificate-->
+		<report
+			id = "signhigh_cert2"
+			model = "sacco.member.application"
+			string = "Singhigh Certificate"
+			report_type = "qweb-pdf"
+			name = "sacco_member.sing_cert2"
+			file = "sacco.report_sing_high2"
+			attachment_use = "True"
+		 />
+
+
+		<template id = "sing_cert2">
+			<t t-call = "report.html_container">
+				<t t-foreach = "docs" t-as="doc">
+					<!--<t t-call = "report.external_layout">-->
+						<div class = "page">
+							<div style="width:800px; height:900px; padding:20px; text-align:center; border: 15px solid #787878">
+								<div style="width:750px; height:850px; padding:20px; text-align:center; border: 5px solid #787878">
+								       <span style="font-size:30px; font-weight:bold; color:ff0000;">Singhigh Membership Certificate </span>
+								       <br/><br/>
+								       <span style="font-size:25px"><i>This is to certify that</i></span>
+								       <br/><br/>
+								       <span style="font-size:30px"><b><span t-field='docs.name'/></b></span><br/><br/>
+								       <span style="font-size:25px"><i>is a Member of</i></span> <br/><br/>
+								       <span style="font-size:30px"><i>Singhigh</i></span> <br/><br/>
+								       <span style="font-size:20px">in good standing since</span> <br/><br/>
+								       <span style="font-size:20px"><i><span t-field='docs.registration_date'/></i></span><br/>								 
+								      <span style="font-size:20px">With all rights and privileges pertaining thereof.</span>
+								      <br/><br/><br/>
+								      <span style="padding-right:30px;">____________________ </span><span>_____________________</span>
+								      <br/><br/><br/>
+								      <span style="padding-right:30px;">Director	 </span><span>Director</span>
+								</div>
+							</div>
+
+
+
+						</div>
+
+					</t>
+				<!--</t> -->
+			</t>
+		</template>
+		<!--Member Card-->
+		<report
+			id = "sacco_member"
+			model = "sacco.member"
+			string = "Member Card"
+			report_type = "qweb-pdf"
+			name = "sacco_member.member_card"
+			file = "sacco.report_members"
+			attachment_use = "True"
+		 />
+
+
+		<template id = "member_card">
+			<t t-call = "report.html_container">
+				<t t-foreach = "docs" t-as="doc">
+					<t t-call = "report.external_layout">
+						<div class = "page">
+
+							<h2>Member Information</h2>
+							<div class="row mt32 mb32">
+                				<div class="col-xs-3" t-if="doc.name">
+                    				<p> <strong>No.:</strong></p>
+                    				<p><strong>Name:</strong></p>
+                    				<p><strong>Registration Date:</strong></p>
+                    				<p><strong>Employer Code:</strong></p>
+                    				<p><strong>DOB:</strong></p>
+                    				<p><strong>Gender:</strong></p>
+
+               					</div>
+               					<div class="col-xs-3" t-if="doc.name">
+                    				<p t-field="doc.no"/>
+                    				<p t-field="doc.name"/>
+                    				<p t-field="doc.registration_date"/>
+                    				<p t-field="doc.employer_code"/>
+                    				<p t-field="doc.date_of_birth"/>
+                    				<p t-field="doc.gender"/>
+               					</div>
+							</div>
+							<h3>Next of Kin Details</h3>
+							 <table class="table table-condensed">
+							 	<thead>
+							 		<tr>
+							 			<th>Name</th>
+							 			<th>Relationship</th>
+							 			<th>Beneficiary</th>
+							 			<th>Telephone</th>
+							 			<th>Address</th>
+							 			<th>Email</th>
+							 			<th>Percentage Allocation</th>
+							 		</tr>
+							 	</thead>
+							 	<tbody>
+							 		<tr t-foreach="doc.next_of_kin_id_member" t-as="l">
+							 			<td><span t-field= "l.name" /></td>
+							 			<td><span t-field= "l.relationship" /></td>
+							 			<td><span t-field= "l.beneficiary" /></td>
+							 			<td><span t-field= "l.telephone" /></td>
+							 			<td><span t-field= "l.address" /></td>
+							 			<td><span t-field= "l.email" /></td>
+							 			<td><span t-field= "l.percentage_allocation" /></td>
+							 		</tr>
+							 	</tbody>
+							 </table>
+						</div>
+
+
+					</t>
+				</t>
+			</t>
+		</template>
+		<!--Member Register-->
+		<report
+			id = "sacco_member_register"
+			model = "sacco.member"
+			string = "Member Register"
+			report_type = "qweb-pdf"
+			name = "sacco_member.member_register"
+			file = "sacco.report_members_register"
+			attachment_use = "True"
+		 />
+
+		 <template id = "member_register">
+			<t t-call = "report.html_container">
+				<!--<t t-foreach = "docs" t-as="doc">-->
+					<t t-call = "report.external_layout">
+						<div class = "page">
+							<div class="row mt32 mb32">
+								<h2>Member Register</h2>
+								<table class="table table-condensed">
+									<thead>
+										<tr>
+											<th>No.</th>
+											<th>Name</th>
+											<th>Address</th>
+											<th>Phone No.</th>
+											<th>Mobile No.</th>
+											<th>Email</th>
+										</tr>
+									</thead>
+									<tbody class="invoice_tbody">
+										<tr t-foreach="docs" t-as="l">
+											<td><span t-field="l.no"/></td>
+											<td><span t-field="l.name"/></td>
+											<td><span t-field="l.address"/></td>
+											<td><span t-field="l.phone_no"/></td>
+											<td><span t-field="l.mobile_no"/></td>
+											<td><span t-field="l.email"/></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</t>
+				<!--</t>-->
+			</t>
+		</template>
+		<!--Member Statement-->
+		<report
+			id = "sacco_member_statement"
+			model = "sacco.member"
+			string = "Member Statement"
+			report_type = "qweb-pdf"
+			name = "sacco_member.member_statement"
+			file = "sacco.report_members_statement"
+			attachment_use = "True"
+		 />
+
+		 <template id = "member_statement">
+			<t t-call = "report.html_container">
+				<t t-call = "report.external_layout">
+					<div class = "page">
+						<h2>Member Statement</h2>
+						<div class="row mt32 mb32" t-if="docs.name">
+							<div class="col-xs-3" >
+								<p><strong>No.:</strong></p>
+								<p><strong>Name:</strong></p>
+								<p><strong>Employer Code:</strong></p>
+							</div>
+							<div class="col-xs-3">
+								<p t-field="docs.no"/>
+								<p t-field="docs.name"/>
+								<p t-field="docs.employer_code"/>
+							</div>
+							<div class="col-xs-3">
+								<p><strong>ID No.:</strong></p>
+								<p><strong>Gender:</strong></p>
+								<p><strong>Account Status:</strong></p>
+							</div>
+							<div class="col-xs-3">
+								<p t-field="docs.idno"/>
+								<p t-field="docs.gender"/>
+								<p t-field="docs.employer_code"/>
+							</div>
+
+						</div>
+
+						<table class="table table-condensed">
+							<thead>
+								<tr>
+									<th>Description</th>
+									<th>As at</th>
+									<th>Amount</th>
+									<th>Balance</th>
+
+
+								</tr>
+							</thead>
+							<tbody class="invoice_tbody">
+								<tr>
+
+										<td><b>Share Contribution</b></td>
+										<td><span t-esc="time.strftime('%Y-%m-%d %H:%M:%S')"/></td>
+										<td><span t-field="docs.current_shares"/></td>
+										<td><span t-field="docs.current_shares"/></td>
+
+
+								</tr>
+								<tr>
+
+										<td><b>Deposit Contribution</b></td>
+										<td><span t-esc="time.strftime('%Y-%m-%d %H:%M:%S')"/></td>
+										<td><span t-field="docs.current_deposits"/></td>
+										<td><span t-field="docs.current_deposits"/></td>
+
+
+								</tr>
+								<tr>
+
+										<td><b>current Loan</b></td>
+										<td><span t-esc="time.strftime('%Y-%m-%d %H:%M:%S')"/></td>
+										<td><span t-field="docs.current_loan"/></td>
+										<td><span t-field="docs.current_loan"/></td>
+
+
+								</tr>
+
+							</tbody>
+						</table>
+						<!--
+						<div class="row mt32 mb32">
+
+							<h4>Share Capital</h4>
+							<div class="col-xs-3" >
+								<p><strong>Description</strong></p>
+								<p>Share Contribution</p>
+							</div>
+							<div class="col-xs-3" >
+								<p><strong>As at</strong></p>
+								<p>01/12/2015</p>
+							</div>
+							<div class="col-xs-3" >
+								<p><strong>Amount</strong></p>
+								<p t-field="docs.current_shares"/>
+							</div>
+							<div class="col-xs-3" >
+								<p><strong>Balance</strong></p>
+								<p t-field="docs.current_shares"/>
+							</div>
+
+
+						</div>
+
+
+						<div class="row mt32 mb32" >
+							<h4>Deposits</h4>
+							<div class="col-xs-3" >
+								<p><strong>Description</strong></p>
+								<p>Deposit Contribution</p>
+							</div>
+							<div class="col-xs-3" >
+								<p><strong>As at</strong></p>
+								<p>01/12/2015</p>
+							</div>
+							<div class="col-xs-3" >
+								<p><strong>Amount</strong></p>
+								<p t-field="docs.current_deposits"/>
+							</div>
+							<div class="col-xs-3" >
+								<p><strong>Balance</strong></p>
+								<p t-field="docs.current_deposits"/>
+							</div>
+
+						</div>
+
+						<div class="row mt32 mb32" >
+							<h4>Loans</h4>
+							<div class="col-xs-3" >
+								<p><strong>Description</strong></p>
+								<p>Loans</p>
+							</div>
+							<div class="col-xs-3" >
+								<p><strong>As at</strong></p>
+								<p>01/12/2015</p>
+							</div>
+							<div class="col-xs-3" >
+								<p><strong>Amount</strong></p>
+								<p t-field="docs.current_loan"/>
+							</div>
+							<div class="col-xs-3" >
+								<p><strong>Balance</strong></p>
+								<p t-field="docs.current_loan"/>
+							</div>
+
+						</div>
+					-->
+					</div>
+				</t>
+			</t>
+		</template>
+		<!--Detailed Member Statement-->
+		<report
+			id = "sacco_detailed_member_statement"
+			model = "sacco.member"
+			string = "Detailed Member Statement"
+			report_type = "qweb-pdf"
+			name = "sacco_member.detailed_member_statement"
+			file = "sacco_member.detailed_member_statement"
+			attachment_use = "True"
+		 />
+
+		 <template id = "detailed_member_statement">
+			<t t-call = "report.html_container">
+				<t t-call = "report.external_layout">
+					<div class = "page">
+						<h2>Detailed Member Statement</h2>
+						<div class="row mt32 mb32" t-if="docs.name">
+							<div class="col-xs-3" >
+								<p><strong>No.:</strong></p>
+								<p><strong>Name:</strong></p>
+								<p><strong>Employer Code:</strong></p>
+							</div>
+							<div class="col-xs-3">
+								<p t-field="docs.no"/>
+								<p t-field="docs.name"/>
+								<p t-field="docs.employer_code"/>
+							</div>
+							<div class="col-xs-3">
+								<p><strong>ID No.:</strong></p>
+								<p><strong>Gender:</strong></p>
+								<p><strong>Account Status:</strong></p>
+							</div>
+							<div class="col-xs-3">
+								<p t-field="docs.idno"/>
+								<p t-field="docs.gender"/>
+								<p t-field="docs.employer_code"/>
+							</div>
+
+						</div>
+						<h4>Share Contribution</h4>
+						<table class="table table-condensed">
+							<thead>
+								<tr>
+									<th>No.</th>
+									<th>Date</th>
+									<th>Transaction Type</th>
+									<th>Description</th>
+									<th>Amount</th>
+
+								</tr>
+							</thead>
+							<tfoot>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td><h4>Balance:</h4></td>
+								<td><h4><strong><span t-field="docs.current_shares"/></strong></h4></td>
+							</tfoot>
+							<tbody class="invoice_tbody">
+								<tr t-foreach="docs.ledger_ids" t-as="l">
+									<span t-if="l.transaction_type == 'shares'">
+										<td><span t-field="l.transaction_no"/></td>
+										<td><span t-field="l.date"/></td>
+										<td><span t-field="l.transaction_type"/></td>
+										<td><span t-field="l.transaction_name"/></td>
+										<td><span t-field="l.amount"/></td>
+									</span>
+								</tr>
+							</tbody>
+
+						</table>
+							<h4>Deposit Contribution</h4>
+						<table class="table table-condensed">
+							<thead>
+								<tr>
+									<th>No.</th>
+									<th>Date</th>
+									<th>Transaction Type</th>
+									<th>Description</th>
+									<th>Amount</th>
+
+								</tr>
+							</thead>
+							<tfoot>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td><h4>Balance:</h4></td>
+								<td><h4><strong><span t-field="docs.current_deposits"/></strong></h4></td>
+							</tfoot>
+							<tbody class="invoice_tbody">
+								<tr t-foreach="docs.ledger_ids" t-as="l">
+									<span t-if="l.transaction_type == 'deposits' or l.transaction_type == 'withdrawal'">
+										<td><span t-field="l.transaction_no"/></td>
+										<td><span t-field="l.date"/></td>
+										<td><span t-field="l.transaction_type"/></td>
+										<td><span t-field="l.transaction_name"/></td>
+										<td><span t-field="l.amount"/></td>
+									</span>
+								</tr>
+							</tbody>
+
+						</table>
+						<h4>Loans</h4>
+						<table class="table table-condensed">
+							<thead>
+								<tr>
+									<th>No.</th>
+									<th>Date</th>
+									<th>Transaction Type</th>
+									<th>Description</th>
+									<th>Amount</th>
+
+								</tr>
+							</thead>
+							<tfoot>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td><h4>Balance:</h4></td>
+								<td><h4><strong><span t-field="docs.current_loan"/></strong></h4></td>
+							</tfoot>
+							<tbody class="invoice_tbody">
+								<tr t-foreach="docs.ledger_ids" t-as="l">
+									<span t-if="l.transaction_type == 'loan'">
+										<td><span t-field="l.transaction_no"/></td>
+										<td><span t-field="l.date"/></td>
+										<td><span t-field="l.transaction_type"/></td>
+										<td><span t-field="l.transaction_name"/></td>
+										<td><span t-field="l.amount"/></td>
+									</span>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+				</t>
+			</t>
+		</template>
+
+	</data>
+</openerp>

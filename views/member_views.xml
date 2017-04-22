@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+   <record model = "ir.ui.view" id = "member_application_form_view">
+        <field name = "name">member.application.form</field>
+        <field name = "model">sacco.member.application</field>
+        <field name = "arch" type = "xml">
+          <form string = "SINGHIGH MEMBERS">
+          	<header>
+            <!--
+             <button name="sendApprovalRequest" type = "object" confirm = "Send approval request?" string = "Send Approval Request" class="oe_highlight" />
+             <button name="cancelApprovalRequest" type = "object" confirm = "Cancel approval request?" string = "Cancel Approval Request" class="oe_highlight" />
+             <button name="approveApprovalRequest" type = "object" confirm = "Approve approval request?" string = "Approve" class="oe_highlight"
+              />
+             <button name="rejectApprovalRequest" type = "object" confirm = "Reject approval request?" string = "Reject" class="oe_highlight" />-->
+             <button name="create_member" type = "object" confirm = "Do you want to create member?" string = "Create Member"
+              class="oe_highlight" attrs="{'invisible': [('created','=','True')]}"/>
+
+            </header>
+          	<sheet>
+              <field name = 'image' widget="image" class="oe_left oe_avatar"/>
+              <!--
+              <div class="oe_right oe_button_box" name="buttons">
+              <button name = '%(tritel.approval_entry_list_action)d' class = "oe_inline oe_stat_button" type = 'action' icon="fa-check-square-o">
+                <field name = 'approvers' string = "Approvals" widget = 'statinfo'/>
+              </button>
+              </div>
+              -->
+          		<group>
+          			<group string = 'General'>
+          				<field name  = 'no' />
+                  <field name  = 'registration_date' />
+          				<field name  = 'name' />
+                  <field name = 'alias' />
+
+          				<field name  = 'date_of_birth' />
+                  <field name = 'created'/>
+
+          			</group>
+          			<group string = 'Important'>
+
+
+          				<field name  = 'idno' />
+          				<field name  = 'passportno' />
+                  <field name = 'member_pin' />
+          				<field name  = 'marital_status' />
+          				<field name  = 'gender' />
+          			</group>
+                <group string = 'Communication'>
+                    <field name  = 'mobile_no' />
+                      <field name  = 'phone_no' />
+                      <field name  = 'email' />
+                      <field name  = 'home_address' />
+                      <field name = 'address'/>
+                      
+                </group>
+                
+                <group string = 'Additional'>
+                      <field name = 'nationality' />
+                      <field name = 'birth_county' />
+                      <field name  = 'district' />
+          				    <field name  = 'location' />
+                      <field name  = 'sublocation' />
+                      
+                      
+
+                </group>
+                 <group string = 'Bank Details'>
+                      <field name = 'bank_name' />
+                      <field name = 'branch_name' />
+                      <field name = 'account_holder' />
+                      <field name  = 'bank_account_no' />
+                      <field name  = 'account_type' />
+                      <field name  = 'bank_address' />
+                      
+                      
+
+                </group>
+                 <group string = 'Other Music Society Details'>
+                      <field name = 'music_society' />
+                      <field name = 'music_society_no' />
+                      <field name = 'performers_right' />
+                      <field name  = 'registered_as' />
+                      <field name  = 'membership_no' />
+                      
+                      
+
+                </group>
+
+
+
+
+          			</group>
+
+
+
+              <notebook>
+               <!-- <page string = 'Communication'>
+                  <group colspan = '2'>
+                    <group>
+                      
+                      <field name  = 'contact_person' />
+                      <field name  = 'contact_person_phone_no' />
+                      <field name  = 'contact_person_relation' />
+                    </group>
+                    <group>
+                      <field name  = 'home_address' />
+                      <field name  = 'location' />
+                      <field name  = 'sublocation' />
+                      <field name  = 'district' />
+                    </group>
+                  </group>
+
+
+                </page>
+                
+                <page string = 'Salary Details'>
+                  <group colspan = '2'>
+                      <group>
+                        <field name  = 'payrollno' />
+                         <field name = 'basic_pay'/>
+                         <field name = 'house_allowance'/>
+                         <field name = 'transport_allowance'/>
+                      </group>
+                      <group>
+                         <field name = 'other_benefits'/>
+                         <field name = 'total_deductions'/>
+                         <field name = 'net_income'/>
+                      </group>
+                   </group>
+                </page>
+                -->
+                <page string = 'Next of Kin Details'>
+                  <field name = 'next_of_kin_id_member_app'>
+                    <tree editable="bottom">
+                      <field name = 'title' />
+                      <field name = 'surname' />
+                      <field name = 'name' />
+                      <field name = 'relationship' />
+                      <field name = 'idno'/>
+                      <field name = 'email' />
+                      <field name = 'telephone' />
+                      <field name = 'address' />
+                      <field name = 'postal_code' />
+                      
+                    </tree>
+                  </field>
+                </page>
+                <page string = 'Composed Music'>
+                  <field name = 'composed_music'>
+                    <tree editable="bottom">
+                      <field name = 'name' />
+                      <field name = 'comment' />
+                    </tree>
+                  </field>
+                </page>
+                 <page string = 'Produced Music'>
+                  <field name = 'produced_music'>
+                    <tree editable="bottom">
+                      <field name = 'name' />
+                      <field name = 'comment' />
+                    </tree>
+                  </field>
+                </page>
+
+              </notebook>
+
+          	</sheet>
+
+      	  </form>
+      	</field>
+      </record>
+
+
+  	  <record model = "ir.ui.view" id = "member_application_tree_view">
+  	  	<field name = "name">member.application.tree.view </field>
+  	  	<field name = "model">sacco.member.application</field>
+  	  	<field name = "arch" type = "xml">
+  	  		<tree string = "Singhigh Members">
+  				<field name  = 'no' />
+  				<field name  = 'name' />
+  				<field name  = 'address' />
+  				<field name  = 'phone_no' />
+  				<field name  = 'mobile_no' />
+  				<field name  = 'email' />
+  	  		</tree>
+  	  	</field>
+  	  </record>
+
+
+      	  <record model = 'ir.ui.view' id = 'member_form_view'>
+      	  	<field name = 'name'>member.form.view</field>
+      	  	<field name = 'model'>sacco.member</field>
+      	  	<field name = 'arch' type = 'xml'>
+      	  		<form string = "Member Card">
+      	  			<header>
+
+      	  			</header>
+      	  			<sheet>
+                  <field name = 'image' widget="image" class="oe_left oe_avatar"/>
+      	  			<group>
+                <group string = 'General'>
+                  <field name  = 'no' />
+                  <field name  = 'registration_date' />
+                  <field name  = 'name' />
+                  <field name = 'alias' />
+
+                  <field name  = 'date_of_birth' />
+                  <field name = 'created'/>
+
+                </group>
+                <group string = 'Important'>
+
+
+                  <field name  = 'idno' />
+                  <field name  = 'passportno' />
+                  <field name = 'member_pin' />
+                  <field name  = 'marital_status' />
+                  <field name  = 'gender' />
+                </group>
+                <group string = 'Communication'>
+                    <field name  = 'mobile_no' />
+                      <field name  = 'phone_no' />
+                      <field name  = 'email' />
+                      <field name  = 'home_address' />
+                      <field name = 'address'/>
+                      
+                </group>
+                
+                <group string = 'Additional'>
+                      <field name = 'nationality' />
+                      <field name = 'birth_county' />
+                      <field name  = 'district' />
+                      <field name  = 'location' />
+                      <field name  = 'sublocation' />
+                      
+                      
+
+                </group>
+                 <group string = 'Bank Details'>
+                      <field name = 'bank_name' />
+                      <field name = 'branch_name' />
+                      <field name = 'account_holder' />
+                      <field name  = 'bank_account_no' />
+                      <field name  = 'account_type' />
+                      <field name  = 'bank_address' />
+                      
+                      
+
+                </group>
+                 <group string = 'Other Music Society Details'>
+                      <field name = 'music_society' />
+                      <field name = 'music_society_no' />
+                      <field name = 'performers_right' />
+                      <field name  = 'registered_as' />
+                      <field name  = 'membership_no' />
+                      
+                      
+
+                </group>
+
+                </group>
+                <notebook>
+                <page string = 'Next of Kin Details'>
+                  <field name = 'next_of_kin_id_member'>
+                    <tree editable="bottom">
+                      <field name = 'title' />
+                      <field name = 'surname' />
+                      <field name = 'name' />
+                      <field name = 'relationship' />
+                      <field name = 'idno'/>
+                      <field name = 'email' />
+                      <field name = 'telephone' />
+                      <field name = 'address' />
+                      <field name = 'postal_code' />
+                      
+                    </tree>
+                  </field>
+                </page>
+                <page string = 'Composed Music'>
+                  <field name = 'composed_music'>
+                    <tree editable="bottom">
+                      <field name = 'name' />
+                      <field name = 'comment' />
+                    </tree>
+                  </field>
+                </page>
+                 <page string = 'Produced Music'>
+                  <field name = 'produced_music'>
+                    <tree editable="bottom">
+                      <field name = 'name' />
+                      <field name = 'comment' />
+                    </tree>
+                  </field>
+                </page>
+                <!--
+                <page string = "Current Loans">
+                  <field name = 'loan_ids'>
+                    <tree>
+
+                      <field name = 'application_date'/>
+                      <field name = 'id'/>
+                      <field name = 'staff_no'/>
+                      <field name = 'loan_product_type'/>
+                      <field name = 'requested_amount'/>
+                      <field name = 'approved_amount'/>
+                      <field name = 'installments'/>
+                    </tree>
+                  </field>
+                </page>
+                
+                <page string = 'Next of Kin Details'>
+                  <field name = 'next_of_kin_id_member'>
+                    <tree editable="bottom">
+                      <field name = 'title' />
+                      <field name = 'surname' />
+                      <field name = 'name' />
+                      <field name = 'relationship' />
+                      <field name = 'idno'/>
+                      <field name = 'email' />
+                      <field name = 'telephone' /> 
+                      <field name = 'address' />
+                      <field name = 'postal_code' />                      
+                    </tree>
+                  </field>
+                </page>-->
+              </notebook>
+      	  		</sheet>
+      	  		</form>
+      	  	</field>
+      	  </record>
+
+            <record model = 'ir.ui.view' id = 'licensed_form_view'>
+            <field name = 'name'>licensed.form.view</field>
+            <field name = 'model'>sacco.licensed.customers</field>
+            <field name = 'arch' type = 'xml'>
+              <form string = "Consumer Card">                
+                <sheet>                  
+                <group>
+                <group string = 'General'>
+                  <field name  = 'full_name' />
+                  <field name  = 'name' />
+                  <field name  = 'id_no' />
+                  <field name = 'kra_pin' />
+                  <field name  = 'registration_date' />                  
+                </group>
+                <group string = 'Communication'>
+                    <field name  = 'mobile_no' />
+                      <field name  = 'phone_no' />
+                      <field name  = 'email' />
+                      <field name  = 'county' />
+                      <field name = 'address'/>
+                      
+                </group> 
+                </group>
+                <notebook>
+                <page string = 'License Details'>
+                  <field name = 'business_id'>
+                    <tree editable="bottom">
+                      <field name = 'licenses' />
+                      <field name = 'description' />
+                      <field name = 'amount' />
+                      <field name = 'comment' />                    
+                    </tree>
+                  </field>
+                </page>
+              </notebook>
+              </sheet>
+              </form>
+            </field>
+          </record> 
+<!-- 
+            <record model = 'ir.ui.view' id = 'licensed_tree_view'>
+            <field name = 'name'>sacco.licensed.tree.view</field>
+            <field name = 'model'>sacco.licensed.customers</field>
+            <field name = 'arch' type = 'xml'>
+              <tree string = 'Licensed Consumers'>
+                <field name = 'full_name'/>
+                <field name = 'name'/>
+                <field name = 'address'/>
+                <field name = 'phone_no'/>
+                <field name = 'mobile_no'/>
+                <field name = 'email'/>
+              </tree>
+            </field>
+-->
+            <record model = 'ir.ui.view' id = 'licensed_type_tree_view'>
+            <field name = 'name'>sacco.licensed.type.tree.view</field>
+            <field name = 'model'>sacco.license.type</field>
+            <field name = 'arch' type = 'xml'>
+              <tree string = 'License type'>
+                <field name = 'name'/>
+                <field name = 'description'/>
+                <field name = 'amount'/>
+              </tree>
+            </field>
+          </record>
+
+      	  <record model = 'ir.ui.view' id = 'member_tree_view'>
+      	  	<field name = 'name'>sacco.member.tree.view</field>
+      	  	<field name = 'model'>sacco.member</field>
+      	  	<field name = 'arch' type = 'xml'>
+      	  		<tree string = 'Singhigh Sacco Members'>
+                <field name = 'no'/>
+      					<field name = 'name'/>
+      					<field name = 'address'/>
+      					<field name = 'phone_no'/>
+      					<field name = 'mobile_no'/>
+      					<field name = 'email'/>
+      	  		</tree>
+      	  	</field>
+
+      	  </record>
+
+      <record model = 'ir.ui.view' id = 'member_closure_form_view'>
+        <field name = 'name'>Member Closure Form</field>
+        <field name = 'model'>sacco.member.closure</field>
+        <field name = 'arch' type = 'xml'>
+          <form>
+            <header>
+              <button name="sendApprovalRequest" type = "object" confirm = "Send approval request?" string = "Send Approval Request" class="oe_highlight" />
+             <button name="cancelApprovalRequest" type = "object" confirm = "Cancel approval request?" string = "Cancel Approval Request" class="oe_highlight" />
+             <button name="approveApprovalRequest" type = "object" confirm = "Approve approval request?" string = "Approve" class="oe_highlight"
+              />
+             <button name="rejectApprovalRequest" type = "object" confirm = "Reject approval request?" string = "Reject" class="oe_highlight" />
+
+
+              <button name="deactivate_member" type = "object" confirm = "Do you want to suspend the member account?" string = "Deactivate Member" class="oe_highlight"/>
+              <field name = 'status' widget = 'statusbar'/>
+            </header>
+
+            <sheet>
+              <field name = 'image' widget="image" class="oe_left oe_avatar"/>
+              <div class="oe_right oe_button_box" name="buttons">
+              <button name = '%(tritel.approval_entry_list_action)d' class = "oe_inline oe_stat_button" type = 'action' icon="fa-check-square-o">
+                <field name = 'approvers' string = "Approvals" widget = 'statinfo'/>
+              </button>
+            </div>
+
+              <group colspan = '2'>
+
+                <group>
+                  <field name = 'no'/>
+                  <field name = 'member_no' widget = 'selection'/>
+                  <field name = 'closing_date'/>
+
+                  <field name = 'closed'/>
+                </group>
+                <group>
+                  <field name = 'total_loan'/>
+                  <field name = 'total_interest'/>
+                  <field name = 'member_savings'/>
+                  <field name = 'closure_type'/>
+                  <field name = 'deposit_refundable'/>
+                  <field name = 'remarks'/>
+                </group>
+              </group>
+            </sheet>
+          </form>
+        </field>
+
+      </record>
+      <record model = 'ir.ui.view' id = 'member_closure_tree_view'>
+        <field name = 'name'>Member Closure List</field>
+        <field name = 'model'>sacco.member.closure</field>
+        <field name = 'arch' type = 'xml'>
+          <tree>
+            <field name = 'no'/>
+            <field name = 'member_no'/>
+            <field name = 'closing_date'/>
+            <field name = 'status'/>
+            <field name = 'closed'/>
+          </tree>
+        </field>
+      </record>
+
+      <record model = 'ir.ui.view' id = 'member_activation_form_view'>
+        <field name = 'name'>Member Activation</field>
+        <field name = 'model'>sacco.member.activation</field>
+        <field name = 'arch' type = 'xml'>
+          <form string = 'Member Activation'>
+            <header>
+              <button name="activate_member" type = "object" confirm = "Do you want to activate the member?" string = "Activate Member"
+              class="oe_highlight"/>
+            </header>
+            <sheet>
+              <group colspan = '2'>
+                <group>
+                  <field name = 'no'/>
+                  <field name = 'member_no'/>
+                  <field name = 'activation_date'/>
+                  <field name = 'status'/>
+                  <field name = 'activated'/>
+                </group>
+                <group>
+                  <field name = 'total_loan'/>
+                  <field name = 'total_interest'/>
+                  <field name = 'total_deposits'/>
+                  <field name = 'closure_type'/>
+                </group>
+              </group>
+            </sheet>
+          </form>
+        </field>
+      </record>
+			<record model = 'ir.ui.view' id = 'member_activation_tree_view'>
+        <field name = 'name'>Member Activation List</field>
+        <field name = 'model'>sacco.member.activation</field>
+        <field name = 'arch' type = 'xml'>
+          <tree string = 'Member Activation List'>
+              <field name = 'no'/>
+              <field name = 'member_no'/>
+              <field name = 'activation_date'/>
+              <field name = 'status'/>
+              <field name = 'activated'/>
+          </tree>
+        </field>
+      </record>
+      <record model = 'ir.ui.view' id = 'sacco_employer_form_view'>
+         <field name = 'name'>Employers List</field>
+         <field name = 'model'>sacco.employer</field>
+         <field name = 'arch' type = 'xml'>
+            <form>
+               <sheet>
+                  <group string = 'Employer Details'>
+                     <field name = 'name' />
+                     <field name = 'description' />
+                     <field name = 'no_of_members'/>
+                     <field name = 'male'/>
+                     <field name = 'female'/>
+                  </group>
+               </sheet>
+            </form>
+         </field>
+      </record>
+      <record model = 'ir.ui.view' id = 'sacco_employer_tree_view'>
+         <field name = 'name'>Employer List</field>
+         <field name = 'model'>sacco.employer</field>
+         <field name = 'arch' type = 'xml'>
+            <tree string = 'Employer List'>
+               <field name = 'name' />
+               <field name = 'description' />
+               <field name = 'no_of_members'/>
+               <field name = 'male'/>
+               <field name = 'female'/>
+            </tree>
+         </field>
+      </record>
+
+      <record model = 'ir.ui.view' id = 'sacco_share_transfer_form_view'>
+         <field name = 'name'>Share Transfer</field>
+         <field name = 'model'>sacco.share.transfer</field>
+         <field name = 'arch' type = 'xml'>
+            <form string = 'Share Transfer'>
+              <header>
+                <button name="transfer" type = "object" confirm = "Do you want to transfer the shares?" string = "Transfer Shares"/>
+              </header>
+              <sheet>
+                <!--<field name = 'name'/>-->
+                <field name = 'name' attrs="{'invisible':1}"/>
+                <field name = 'transfer_from_picture' widget="image" class="oe_left oe_avatar"/>
+                <field name = 'transfer_to_picture' widget="image" class="oe_right oe_avatar"/>
+                <group colspan = '3'>
+                <group string = 'Transfer From'>
+                  <field name = 'transfer_from'/>
+                  <field name = 'transfer_from_shares'/>
+                </group>
+                <group string = 'Transfer To'>
+                  <field name = 'transfer_to'/>
+                  <field name = 'transfer_to_shares'/>
+                </group>
+                <group string = 'Transfer Details'>
+                  <field name = 'share_worth'/>
+                  <field name = 'date'/>
+                  <field name = 'status'/>
+                </group>
+              </group>
+
+              </sheet>
+            </form>
+          </field>
+        </record>
+
+      <record model = 'ir.ui.view' id = 'sacco_share_transfer_tree_view'>
+         <field name = 'name'>Share Transfer List</field>
+         <field name = 'model'>sacco.share.transfer</field>
+         <field name = 'arch' type = 'xml'>
+            <tree string = 'Share Transfer'>
+              <field name = 'name'/>
+              <field name = 'transfer_from'/>
+              <field name = 'transfer_to'/>
+              <field name = 'share_worth'/>
+              <field name = 'date'/>
+
+            </tree>
+        </field>
+      </record>
+
+
+
+      	  <!--start creating the sacco menus here-->
+  	  <record model = "ir.actions.act_window" id = "member_application_list_action">
+	      <field name ="name">Singhigh Members</field>
+	      <field name ="res_model">sacco.member.application</field>
+        <!--<field name = "domain">[('created','=',0)]</field>
+        <field name = "filter" eval = "True"/> -->
+	      <field name ="view_type">form</field>
+	      <field name ="view-mode">tree,form</field>
+	      <field name ="help" type ="html">
+	        <p class ="oe_view_nocontent_create">Create member</p>
+	      </field>
+  	  </record>
+
+      <menuitem name ="Singhigh" id = "sacco_management_main_menu" />
+      <menuitem name = "Singhigh Member Management" id = "signhigh_member_management_main_menu" parent = "sacco_management_main_menu" sequence = "5"/>
+      <menuitem name = "Sacco Member Management" id = "sacco_member_management_main_menu" parent = "sacco_management_main_menu" sequence = "10"/>
+      <menuitem name = "License Management" id = "sacco_license_management_main_menu" parent = "sacco_management_main_menu" sequence = "15"/>
+      <menuitem name = "Singhigh Members list" id = "member_application_list" parent = "signhigh_member_management_main_menu" action = "member_application_list_action"/>
+      <!--History-->
+      <record model = "ir.actions.act_window" id = "member_application_list_action_history">
+        <field name ="name">Created Singhigh Member</field>
+        <field name ="res_model">sacco.member.application</field>
+        <!--<field name = "domain">[('created','=',1)]</field>
+        <field name = "filter" eval = "True"/>-->
+        <field name ="view_type">form</field>
+        <field name ="view-mode">tree,form</field>
+        <field name ="help" type ="html">
+          <p class ="oe_view_nocontent_create">Create member</p>
+        </field>
+      </record>
+      <menuitem name = "History" id = "sacco_member_history_main_menu" parent = "sacco_member_management_main_menu"  sequence = "90"/>
+      <menuitem name = "Created Singhigh Member list" id = "member_application_list_history" parent = "sacco_member_history_main_menu" action = "member_application_list_action_history"/>
+      <!--End History-->
+      <record model = 'ir.actions.act_window' id = 'member_list_action'>
+      	<field name = 'name'>member.list.action</field>
+      	<field name = 'res_model'>sacco.member</field>
+      	<field name = 'view_type'>form</field>
+      	<field name = 'view-mode'>tree,form</field>
+      </record>
+      
+
+      <menuitem name = "Sacco Members List" id = "member_list" parent = "sacco_member_management_main_menu" action = "member_list_action" />
+
+      <record model = 'ir.actions.act_window' id = 'license_list_action'>
+        <field name = 'name'>license.list.action</field>
+        <field name = 'res_model'>sacco.licensed.customers</field>
+        <field name = 'view_type'>form</field>
+        <field name = 'view-mode'>tree,form</field>
+      </record>
+      <menuitem name = "Licensed Members List" id = "license_list" parent = "sacco_license_management_main_menu" action = "license_list_action" />
+      <record model = 'ir.actions.act_window' id = 'member_closure_list_action'>
+        <field name = 'name'>Member Closure List</field>
+        <field name = 'res_model'>sacco.member.closure</field>
+        <field name = "domain">[('closed','=',0)]</field>
+        <field name = "filter" eval = "True"/>
+        <field name = 'view_type'>form</field>
+        <field name = 'view_mode'>tree,form</field>
+
+      </record>
+      <menuitem name = 'Member Closure List' id = 'member_closure_list' parent = 'sacco_member_management_main_menu' action = 'member_closure_list_action'/>
+
+      <!--Closure History-->
+      <record model = 'ir.actions.act_window' id = 'member_closure_list_action_history'>
+        <field name = 'name'>Closed Member List</field>
+        <field name = 'res_model'>sacco.member.closure</field>
+        <field name = "domain">[('closed','=',1)]</field>
+        <field name = "filter" eval = "True"/>
+        <field name = 'view_type'>form</field>
+        <field name = 'view_mode'>tree,form</field>
+
+      </record>
+      <menuitem name = 'Posted Member Closure List' id = 'member_closure_list_history' parent = 'sacco_member_history_main_menu' action = 'member_closure_list_action_history'/>
+
+      <record model = 'ir.actions.act_window' id = 'member_activation_list_action'>
+        <field name = 'name'>Member Activation List</field>
+        <field name = 'res_model'>sacco.member.activation</field>
+        <field name = "domain">[('activated','=',0)]</field>
+        <field name = "filter" eval = "True"/>
+        <field name = 'view_type'>form</field>
+        <field name = 'view_mode'>tree,form</field>
+      </record>
+      <menuitem name = 'Member Activation List' id = 'member_activation_list' parent = 'sacco_member_management_main_menu' action = 'member_activation_list_action'/>
+
+      <!--Activation History-->
+      <record model = 'ir.actions.act_window' id = 'member_activation_list_action_history'>
+        <field name = 'name'>Activated Member List</field>
+        <field name = 'res_model'>sacco.member.activation</field>
+        <field name = "domain">[('activated','=',1)]</field>
+        <field name = "filter" eval = "True"/>
+        <field name = 'view_type'>form</field>
+        <field name = 'view_mode'>tree,form</field>
+      </record>
+      <menuitem name = 'Activated Member List' id = 'member_activation_list_history' parent = 'sacco_member_history_main_menu' action = 'member_activation_list_action_history'/>
+
+
+      <record model = 'ir.actions.act_window' id = 'member_employers_list_action'>
+        <field name = 'name'>Employers List</field>
+        <field name = 'res_model'>sacco.employer</field>
+        <field name = 'view_type'>form</field>
+        <field name = 'view_mode'>tree,form</field>
+      </record>
+
+
+
+      <record model = 'ir.actions.act_window' id = 'share_transfer_list_action'>
+        <field name = 'name'>Share Transfer List</field>
+        <field name = 'res_model'>sacco.share.transfer</field>
+        <field name = "domain">[('transferred','=',0)]</field>
+        <field name = "filter" eval = "True"/>
+        <field name = 'view_type'>form</field>
+        <field name = 'view_mode'>tree,form</field>
+      </record>
+
+      <menuitem name = 'Share Transfer List' id = 'share_transfer_list' parent = 'sacco_member_management_main_menu' action = 'share_transfer_list_action'/>
+
+      <!--History-->
+      <record model = 'ir.actions.act_window' id = 'share_transfer_list_action_history'>
+        <field name = 'name'>Posted Share Transfers</field>
+        <field name = 'res_model'>sacco.share.transfer</field>
+        <field name = "domain">[('transferred','=',1)]</field>
+        <field name = "filter" eval = "True"/>
+        <field name = 'view_type'>form</field>
+        <field name = 'view_mode'>tree,form</field>
+      </record>
+
+      <menuitem name = 'Posted Share Transfers' id = 'share_transfer_list_history' parent = 'sacco_member_history_main_menu' action = 'share_transfer_list_action_history'/>
+
+
+  </data>
+</openerp>

@@ -1,2 +1,2 @@
 # sacco_member
-Copy Sacco Member
+Sacco Members Package
