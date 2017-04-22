@@ -20,13 +20,13 @@
             </header>
           	<sheet>
               <field name = 'image' widget="image" class="oe_left oe_avatar"/>
-              <!--
+              
               <div class="oe_right oe_button_box" name="buttons">
-              <button name = '%(tritel.approval_entry_list_action)d' class = "oe_inline oe_stat_button" type = 'action' icon="fa-check-square-o">
-                <field name = 'approvers' string = "Approvals" widget = 'statinfo'/>
+              <button name = '%(sacco_member.sacco_member_registration_payments_action)d' class = "oe_inline oe_stat_button" type = 'action' icon="fa-check-square-o" context="{'search_default_member_application_id':id}">
+               <!-- <field name = 'approvers' string = "Approvals" widget = 'statinfo'/>-->
               </button>
               </div>
-              -->
+              
           		<group>
           			<group string = 'General'>
           				<field name  = 'no' />
@@ -597,7 +597,30 @@
         </field>
       </record>
 
+      <record model = 'ir.ui.view' id = 'sacco_member_registration_payments_tree'>
+        <field name = 'name'>Payments</field>
+        <field name = 'model'>sacco.member.application.payments</field>
+        <field name = 'arch' type = 'xml'>
+          <tree>
+            <field name = 'member_application_id'/>
+            <field name = 'amount'/>
+            <field name = 'date'/>
+            <field name = 'reference'/>
+            <field name = 'processed'/>
+            <field name = 'flagged'/>
+          </tree>
+        </field>
+      </record>
 
+      <record model = 'ir.ui.view' id = 'sacco_member_registration_payments_search'>
+        <field name = 'name'>Payments Search</field>
+        <field name = 'model'>sacco.member.application.payments</field>
+        <field name = 'arch' type = 'xml'>
+          <search>
+            <field name = 'member_application_id'/>
+          </search>
+        </field>
+      </record>
 
       	  <!--start creating the sacco menus here-->
   	  <record model = "ir.actions.act_window" id = "member_application_list_action">
@@ -725,6 +748,13 @@
       </record>
 
       <menuitem name = 'Posted Share Transfers' id = 'share_transfer_list_history' parent = 'sacco_member_history_main_menu' action = 'share_transfer_list_action_history'/>
+
+      <record model = 'ir.actions.act_window' id = 'sacco_member_registration_payments_action'>
+        <field name = 'name'>Payments</field>
+        <field name = 'res_model'>sacco.member.application.payments</field>
+        <field name = 'view_type'>form</field>
+        <field name = 'view_mode'>tree,form</field>
+      </record>
 
 
   </data>

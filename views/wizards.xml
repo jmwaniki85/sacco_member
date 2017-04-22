@@ -27,5 +27,31 @@
 			key2 = "client_action_multi" />
 		<menuitem name = 'Reports' id = 'sacco_member_reports_main_menu' parent = 'sacco_member_management_main_menu'/>
 		<menuitem name = 'Member Register' id = 'sacco_member_register_report' parent = 'sacco_member_reports_main_menu' action = 'launch_member_register_wizard' sequence = "100"/>
+
+
+		<record model = 'ir.ui.view' id = 'member_application_payment_wizard'>
+			<field name = "name">Member Application Payments</field>
+			<field name = "model">sacco.member.application.wizard</field>
+			<field name = "arch" type = "xml">
+				<form string = "Member Application">
+					<group>
+						
+					</group>
+					<footer>
+						<button name = "receipts_post" type = "object" string = "Post Receipts" class = "oe_highlight"/>
+						or
+						<button special = "cancel" string = "Cancel"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<act_window id = "launch_member_registration_payments_wizard"
+			name = "Member Application"
+			src_model = "sacco.member.application.payments"
+			res_model = "sacco.member.application.wizard"
+			view_mode = "form"
+			target = "new"
+			key2 = "client_action_multi" />
 	</data>
 </openerp>

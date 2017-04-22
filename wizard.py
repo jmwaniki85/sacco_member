@@ -15,3 +15,12 @@ class member_register_wizard(models.TransientModel):
 			register = self.env['sacco.member'].search([])
 		
 		return self.env['report'].get_action(register,'sacco_member.member_register')  
+
+class member_application_wizard(models.TransientModel):
+	_name = 'sacco.member.application.wizard'
+
+	@api.multi
+	def receipts_post(self):
+		payments = self.env['sacco.member.application.payments'].browse(self._context.get('active_ids'))
+		for payment in payments:
+		    payment.action_post()

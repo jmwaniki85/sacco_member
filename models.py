@@ -89,6 +89,7 @@ class member_application(models.Model):
 	membership_no = fields.Char(string='Membership No')
 	
 	other_membership_no =fields.Char(string = 'Other Membership NO')
+	payment_ids = fields.One2many('sacco.member.application.payments','member_application_id')
 
 
 	@api.one
@@ -109,9 +110,10 @@ class member_application(models.Model):
 
 	@api.one
 	def create_member(self):
-		if self.status != 'approved':
-
-			setup = self.env['sacco.setup'].search([('id','=',1)])
+		setup = self.env['sacco.setup'].search([('id','=',1)])
+		payments = self.env['sacco.member.application.payments'].search([('member_application_id','=',self.id)])
+		total_payments = sum(payment.amount for payment in payments)
+		if total_payments >= setup.registration_fees:
 			sequence = self.env['ir.sequence'].search([('id','=',setup.member_nos.id)])
 			member_no = sequence.next_by_id(sequence.id, context = None)
 
@@ -139,117 +141,91 @@ class member_application(models.Model):
 			for item in kin:
 				item.member_no = new_member.id
 			self.created = True
+			#create member ledger entries
 		else:
-			raise ValidationError("Status must be approved before creating member")
+			pass #Ignore if payments are not enough
 
-	############################################################################################################################
-	'''
-	All approvals management code in here. Until we find a centralized solution, all models will carry their
-	own approvals code. This approach is however open to new ideas in the future once we find a way to centralize
-	code that can call and manipulate models and be called remotely from any model or py file through importation.
-	This first approach will be used as a template for all other approvals. In case of overal change of approach, change
-	this approval so that other programmers can copy and paste and modify where necessary
-	Ensure you have the following functions:
-	::>>SendApprovalRequest
-	::>>checkAdditionalApprovers-->should not change much for subsequent models
-	::>>CancelApprovalRequest
-	::>>ApproveApprovalRequest
-	::>>rejectApprovalRequest
-	'''
-	'''
+
 	@api.one
-	def checkAdditionalApprovers(self,document_type,template_name,document_no):
-		#init
-		approval_template = self.env['approval.template'].search([('document_type','=',document_type)])
-		additional_approvers = self.env['additional.approvers']
-		approval_entry = self.env['approval.entry']
-		#continue
-		approvers = {}
-		#approval_template.search([])#('document_type','=',document_type)
-
-		if len(approval_template)<=0:
-			raise ValidationError("No approval template found for Document Type: "+ document_type)
-
-		else:
-			approvers = additional_approvers.search([('template_id','=',approval_template.id)])
-
-			if len(approvers)<=0:
-				raise ValidationError("No additional approvers for document type:"+document_type)
-
+	def action_post(self,amount):
+		if not self.created:
+			#date
+			if self.registration_date:
+				today = self.registration_date
 			else:
-				sequence = 0
-				for approver in approvers:
-					sequence +=1
-					status = ''
-					if sequence == 1:
-						status = 'open'
-					else:
-						status = 'created'
-					self.env['approval.entry'].create({'document_type':document_type,'document_no':document_no,'document_id':self.id,'sequence':sequence,'approver_id':approver.approver_id.id,'sender_id':self.env.user.id,'status':status,'sender':self.env.user.id,'approver':approver.approver_id.id})
-		self.approveApprovalRequest()
+				today = datetime.now().strftime("%m/%d/%Y")
+			setup = self.env['sacco.setup'].search([('id','=',1)])
+			#create journal header
+			journal = self.env['account.journal'].search([('id','=',setup.miscellaneous_journal.id)]) #get journal id
+			#period
+			period = self.env['account.period'].search([('state','=','draft'),('date_start','<=',today),('date_stop','>=',today)])
+			period_id = period.id
 
+			journal_header = self.env['account.move']#reference to journal entry
 
+			move = journal_header.create({'journal_id':journal.id,'period_id':period_id,'state':'draft','name':self.name,
+				'date':today})
+
+			move_id = move.id
+
+			#create journal lines
+			journal_lines = self.env['account.move.line']
+
+			#get required accounts for the transaction
+			#debit account
+			bank = self.env['account.journal'].search([('id','=',setup.registration_bank.id)])
+			bank_acc = bank.default_debit_account_id.id
+
+			cr = setup.registration_fee_acc.id
+
+			member_ledger = self.env['sacco.member.ledger.entry']
+
+			ledgers = self.env['sacco.member.ledger.entry'].search([])
+			entries = [ledger.entry_no for ledger in ledgers]
+			try:
+				entry_no = max(entries)
+			except:
+				entry_no = 0
+			
+			#post journal
+			journal_lines.create({'journal_id':journal.id,'period_id':period_id,'date':today,'name':'Registration Fees for' + '::' + self.name,'account_id':cr,'move_id':move_id,'credit':amount})
+			journal_lines.create({'journal_id':journal.id,'period_id':period_id,'date':today,'name':'Registration Fees for' + '::' + self.name,'account_id':bank_acc,'move_id':move_id,'amount':amount})
+			#post member ledger entry
+			#entry_no += 1
+			#member = self.env['sacco.member'].search([('id','=',line['member_no'].id)])
+			#member_name = member.name
+			#member_ledger.create({'member_no':line.member_no.id,'member_name':member_name,'date':today,'transaction_no':transaction_no,'transaction_name':transaction_name + '::' + self.name,'amount':factor*line.amount,'transaction_type':entry_type,'entry_no':entry_no})
+
+			move.post()
+			self.create_member()
+		#self.posted = True
+
+class member_application_payments(models.Model):
+	_name = 'sacco.member.application.payments'
+
+	member_application_id = fields.Many2one('sacco.member.application')
+	amount = fields.Float()
+	date = fields.Date()
+	reference = fields.Char()
+	processed = fields.Boolean()
+	flagged = fields.Boolean()
 
 	@api.one
-	def sendApprovalRequest(self):
-		if self.status != 'open':
-			raise ValidationError("Status must be open to send request")
-
-		document_type = 'member_app'
-		template_name = 'member_app'
-
-
-		self.checkAdditionalApprovers(document_type,template_name,self.no)
-
+	def auto_post_receits(self):
+		receipts = self.env['sacco.member.application.payments'].search([('processed','=',False),('flagged','=',False)])
+		for receipt in receipts:
+			try:
+				receipt.member_application_id.action_post(self.amount)
+				self.processed = True
+			except:
+				receipt.flagged = True
 
 	@api.one
-	def cancelApprovalRequest(self):#this is standard. Dont modify for subsequent models
-		if self.status != 'pending':
-			raise ValidationError("Status must be pending to cancel request")
-		#init
-		#approval_templates = self.env['approval.template']
-		#additional_approvers = self.env['additional.approvers']
-		approval_entry = self.env['approval.entry'].search([('document_no','=',self.no),('status','!=','rejected')])
-		if len(approval_entry)>0:
-			#raise ValidationError("Found approval entries to cancel")
-			approval_entry.write({'status':'cancelled'})
-			self.status = 'open'
-
-	@api.one
-	def approveApprovalRequest(self):
-		#init
-		approval_entry = self.env['approval.entry'].search([('document_no','=',self.no),('status','=','open'),('approver_id','=',self.env.user.id)])
-		#if len(approval_entry)<=0:
-		#	raise ValidationError('Current user is not authorized to approve this document')
-		approval_entry.write({'status':'approved'})
-		next_approval_entry = self.env['approval.entry'].search([('document_no','=',self.no),('status','in',['created','open'])])
-		#next_approval_entry.sorted(key=lambda r: r.sequence)
-		if len(next_approval_entry)>0:
-			next_approval_entry = min(next_approval_entry)
-			next_approval_entry.status = 'open'
-			self.status = 'pending'
-			return False
-		else:
-			self.status = 'approved'
-			return True
+	def action_post(self):
+		self.member_application_id.action_post(self.amount)
+		self.processed = True
 
 
-
-	@api.one
-	def rejectApprovalRequest(self):
-		if self.status != 'pending':
-			raise ValidationError("Status must be pending to reject request")
-		#init
-
-		approval_entry = self.env['approval.entry'].search([('document_no','=',self.no),('status','!=','cancelled')])
-
-
-		if len(approval_entry)>0:
-			#raise ValidationError('Found approval entries to cancel')
-			approval_entry.write({'status':'rejected'})
-			self.status = 'rejected'
-############################################################################################################################
-	'''
 class member(models.Model):
 	_name = 'sacco.member'
 	_order = 'no asc'
